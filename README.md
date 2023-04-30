@@ -6,7 +6,7 @@
 
  Há alguns tipos de listas: 
  
-  -Lista Encadeada Estática;
-  -Lista Encadeada Dinâmica;
-  -Lista Duplamente Encadeada Estática;
-  -Lista Duplamente Encadeada Dinâmica;
+    -Lista Encadeada Estática;
+    -Lista Encadeada Dinâmica;
+    -Lista Duplamente Encadeada Estática;
+    -Lista Duplamente Encadeada Dinâmica.
