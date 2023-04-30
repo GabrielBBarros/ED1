@@ -2,7 +2,7 @@
  
  Em Estrutura de Dados 1 aprendemos várias coisas, no primeiro termos vemos Pilha, Lista, Lista Cruzada, Matriz Esparsa e Filas. No segundo termo vemos Hashing e Árvores.
 
-##Lista
+## Lista
 
  Há alguns tipos de listas: 
  
