@@ -37,10 +37,16 @@ bool Inserir(PD*Lista, float valor){
     NO *novo = (NO*)malloc(sizeof(NO));
     novo->valor = valor;
     //Se minha pilha está zerada
+    if (novo == NULL)
+    {
+        return false;
+    }
+    
     if (Lista->topo == NULL)
     {
         //Proximo novo está nulo
         novo->prox = NULL;
+
     }
     else
     {
@@ -49,6 +55,7 @@ bool Inserir(PD*Lista, float valor){
     }
     Lista->topo = novo;
     Lista->tamanho++;
+    return true;
 }
 
 bool Busca(PD*Lista, float valor){
