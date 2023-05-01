@@ -47,6 +47,8 @@ A estrutura básica desses códigos na lista se diferencia entre dinâmica e est
  
  Dinâmica:
     
+    Dinâmico:
+    
     typedef struct no{
     int valor;
     //struct no *ant;
@@ -98,3 +100,23 @@ A estrutura básica desses códigos na lista se diferencia entre dinâmica e est
          int fim;
          int tamanho;
      } FilaEstatica;
+
+## Matriz Esparsa
+
+ Uma matriz esparsa é como se fosse uma tabela da ordem (x,y). É colocado os valores o o restante é preenchido com elementos nulos.
+ 
+      typedef struct no
+      {
+          int valor;
+          int linha;
+          int coluna;
+          struct no *baixo;
+          struct no *direita;
+      }NO;
+
+
+      typedef struct MatrizEsparsa
+      {
+          NO *linha[5];
+          NO *coluna[5];
+      }MatrizEsparsa;
