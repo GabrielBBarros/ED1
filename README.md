@@ -11,3 +11,29 @@
     -Lista Encadeada Dinâmica (Memória alocada dinamicamente, com ponteiro);
     -Lista Duplamente Encadeada Estática (Memória limitada com indicador para proximo e anterior);
     -Lista Duplamente Encadeada Dinâmica (Memória dinamica com ponteiro para proximo e anterior).
+
+A estrutura básica desses códigos na lista se diferencia entre dinâmica e estática, por exemplo:
+
+ Dinâmica:
+        
+     typedef struct no{
+    int valor;
+    struct no *prox;
+    }NO;
+     
+    typedef struct lista{
+       int tamanho;
+       NO *inicio;
+       NO *fim;
+    }Lista;
+    
+Estático:
+ 
+    typedef struct lista{
+       int tamanho;
+       int inicio;
+       int fim;
+       int valores[MAX};
+    }Lista;
+    
+    
