@@ -49,6 +49,47 @@ bool InserirInicio(LD *Lista, float valor)
     return true;
 }
 
+bool InsercaoOrdenada(LD *Lista, float valor){
+    NO *aux = (NO*)malloc(sizeof(NO));
+    aux->valor = valor;
+    aux->prox = NULL;
+    if (Lista->inicio == NULL || valor < Lista->inicio->valor)
+    {
+        aux->prox = Lista->inicio;
+        Lista->inicio = aux;
+        Lista->tamanho++;
+        return true;
+    }
+    NO *anterior = Lista->inicio;
+    NO *atual = anterior->prox;
+    while (atual != NULL && atual->valor < valor)
+    {
+        anterior = atual;
+        atual = atual->prox;
+    }
+    aux->prox = atual;
+    anterior->prox = aux;
+    Lista->tamanho++;
+    return true;  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 bool InserirFinal(LD *Lista, float valor)
 {
     NO *novo = (NO *)malloc(sizeof(NO));
