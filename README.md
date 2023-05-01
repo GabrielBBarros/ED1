@@ -19,6 +19,7 @@ A estrutura básica desses códigos na lista se diferencia entre dinâmica e est
     
     typedef struct no{
     int valor;
+    //struct no *ant;
     struct no *prox;
     }NO;
      
@@ -39,3 +40,61 @@ A estrutura básica desses códigos na lista se diferencia entre dinâmica e est
     }Lista;
     
  Além disso uma das coisas importantes é que na lista podemos inserir no início e no fim. Podemos também fazer outras operações como Inicialização, Cheia, Vazia, Remoção, Busca e Impressão.
+ 
+ ## Fila
+ 
+ Numa fila as caracteristicas são muito parecidos com as listas, a diferença é que na lista apenas inserimos no final, a não ser que ele seja preferencial. As operações são as mesmas.
+ 
+ Dinâmica:
+    
+    typedef struct no{
+    int valor;
+    //struct no *ant;
+    struct no *prox;
+    }NO;
+     
+    typedef struct lista{
+       int tamanho;
+       NO *inicio;
+       NO *fim;
+    }Lista;
+    
+    
+    Estático:
+    
+    typedef struct fila{
+       int tamanho;
+       int inicio;
+       int fim;
+       int valores[MAX};
+    }Fila;
+ 
+ ## Pilha
+ 
+ Em uma pilha diferente das demais segua a estrutra FILO (First in Last out), dessa forma a remoção só pode ser feita no topo da pilha, não em outro lugar, de mais as pilhas seguem o mesmo padrão em termos de função, logo abaixo um exemplo de estrutura de pilha estática e dinamica.
+ 
+     Dinâmica:
+     
+     typedef struct no
+     {
+         float valor;
+         struct no *prox;
+     }NO;
+
+     typedef struct fila
+     {
+         int tamanho;
+         struct NO *inicio;
+         struct NO *fim;
+     }Fila;
+     
+     
+     Estática:
+     
+     typedef struct fila_estatica
+     {
+         int valores[MAX];
+         int inicio;
+         int fim;
+         int tamanho;
+     } FilaEstatica;
