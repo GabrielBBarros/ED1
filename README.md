@@ -14,8 +14,9 @@
 
 A estrutura básica desses códigos na lista se diferencia entre dinâmica e estática, por exemplo:
 
- Dinâmica:
-        
+ 
+    Dinâmica:
+    
     typedef struct no{
     int valor;
     struct no *prox;
@@ -27,8 +28,9 @@ A estrutura básica desses códigos na lista se diferencia entre dinâmica e est
        NO *fim;
     }Lista;
     
-Estático:
- 
+    
+    Estático:
+    
     typedef struct lista{
        int tamanho;
        int inicio;
