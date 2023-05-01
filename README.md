@@ -16,7 +16,7 @@ A estrutura básica desses códigos na lista se diferencia entre dinâmica e est
 
  Dinâmica:
         
-     typedef struct no{
+    typedef struct no{
     int valor;
     struct no *prox;
     }NO;
