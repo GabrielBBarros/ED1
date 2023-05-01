@@ -36,4 +36,4 @@ Estático:
        int valores[MAX};
     }Lista;
     
-    
+ Além disso uma das coisas importantes é que na lista podemos inserir no início e no fim. Podemos também fazer outras operações como Inicialização, Cheia, Vazia, Remoção, Busca e Impressão.
