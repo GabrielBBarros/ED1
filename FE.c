@@ -4,111 +4,132 @@
 
 #define MAX 10
 
-typedef struct fe
+typedef struct fila_estatica
 {
     int valores[MAX];
-    int fim;
     int inicio;
+    int fim;
     int tamanho;
-}FE;
+} FilaEstatica;
 
-void Inicializar(FE *Fila){
-    Fila->tamanho = 0;
-    Fila->inicio = -1;
-    Fila->fim = -1;
+void inicializar(FilaEstatica *fila)
+{
+    fila->tamanho = 0;
+    fila->inicio = 0;
+    fila->fim = -1;
 }
 
-bool Vazio(FE *Fila){
-    if (Fila->inicio == -1)
+bool vazia(FilaEstatica *fila)
+{
+    if (fila->tamanho == 0)
     {
-        printf("Vazio \n");
+        printf("Fila vazia.\n");
         return true;
     }
     else
     {
-        printf("Com elementos \n");
+        printf("Fila com elementos.\n");
         return false;
     }
 }
 
-bool Cheio(FE *Fila){
-    if (Fila->fim == MAX)
+bool cheia(FilaEstatica *fila)
+{
+    if (fila->tamanho == MAX)
     {
-        printf("Cheio \n");
+        printf("Fila cheia.\n");
         return true;
     }
     else
     {
-        printf("Não esta cheio \n");
+        printf("Fila nao esta cheia.\n");
         return false;
     }
 }
 
-bool Inserir(FE *Fila, float valor){
-    //Fila cheia
-    if (Fila->fim == MAX)
+bool inserir(FilaEstatica *fila, int valor)
+{
+    if (fila->tamanho == MAX)
     {
-        printf("Fila cheia \n");
+        printf("Erro: Fila cheia.\n");
         return false;
     }
-    //Inserir no ínicio
-    if (Fila->inicio == -1)
+    else
     {
-        Fila->valores[Fila->inicio] = valor;
-        Fila->tamanho++;
+        fila->fim++;
+        fila->valores[fila->fim] = valor;
+        fila->tamanho++;
         return true;
     }
-    //Inserir no fim
-    Fila->valores[Fila->fim] = valor;
-    Fila->tamanho++;
-    return true;
 }
 
-bool Remover(FE *Fila, float *valor){
-    if (Fila->inicio == -1)
+bool remover(FilaEstatica *fila, int *valor)
+{
+    if (fila->tamanho == MAX)
     {
-        printf("Fila vazia \n");
+        printf("Erro: Fila vazia.\n");
         return false;
     }
-    
-    *valor = Fila->valores[Fila->inicio];
-    Fila->inicio++;
-    Fila->tamanho--;
-    return true;
+    else
+    {
+        *valor = fila->valores[fila->inicio];
+        fila->inicio++;
+        fila->tamanho--;
+        return true;
+    }
 }
 
-bool Buscar(FE *Fila, float valor){
-    if (Fila->inicio == Fila->fim)
+bool buscar(FilaEstatica *fila, int valor)
+{
+    if (fila->tamanho == 0)
     {
-        printf("Fila vazia \n");
+        printf("Erro: Fila vazia.\n");
         return false;
     }
-    for (int i = 0; i <= Fila->fim; i++)
+
+    for (int i = fila->inicio; i <= fila->fim; i++)
     {
-        if (Fila->valores[i] == valor)
+        if (fila->valores[i] == valor)
         {
-            printf("Encontrou");
+            printf("Valor encontrado.\n");
             return true;
         }
-        
-    } 
+    }
+    printf("Valor nao encontrado.\n");
+    return false;
 }
 
-bool Imprimir(FE *Fila){
-    if (Fila->inicio == Fila->fim)
+void imprimir(FilaEstatica *fila)
+{
+    if (fila->tamanho == 0)
     {
-        printf("Fila vazia \n");
-        return false;
+        printf("Erro: Fila vazia.\n");
+        return;
     }
-    for (int i = 0; i <= Fila->fim; i++)
+
+    printf("Conteudo da fila:\n");
+
+    for (int i = fila->inicio; i <= fila->fim; i++)
     {
-            printf("%f \n", Fila->valores[i]);
-    } 
-    return true;
+        printf("%d ", fila->valores[i]);
+    }
+    printf("\n");
 }
 
 int main(int argc, char const *argv[])
 {
-    /* code */
-    return 0;
+    FilaEstatica fila;
+    int valor;
+
+    inicializar(&fila);
+
+    vazia(&fila);
+    cheia(&fila);
+
+    inserir(&fila, 10);
+    inserir(&fila, 20);
+    inserir(&fila, 30);
+    imprimir(&fila);
+
+
 }

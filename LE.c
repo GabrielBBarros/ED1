@@ -32,7 +32,7 @@ bool Vazia(LE *Lista){
 }
 
 bool Cheia(LE *Lista){
-    if (Lista->inicio == MAX)
+    if (Lista->tamanho == MAX)
     {
         printf("Cheia \n");
         return true;
@@ -50,8 +50,13 @@ bool InserirInicio(LE *Lista, int valor){
         printf("Impossivel \n");
         return false;
     }
-    Lista->valores[Lista->inicio] = valor;
+    for (int i = Lista->tamanho; i > 0; i--)
+    {
+        Lista->valores[i] = Lista->valores[i-1];
+    }
+    Lista->valores[0] = valor;
     Lista->tamanho++;
+    Lista->inicio++;
     return true;
 }
 
@@ -61,8 +66,9 @@ bool InserirFinal(LE *Lista, int valor){
         printf("Impossivel \n");
         return false;
     }
-    Lista->valores[Lista->final] = valor;
+    Lista->valores[Lista->tamanho] = valor;
     Lista->tamanho++;
+    Lista->final = Lista->tamanho-1;
     return true;
 }
 
@@ -90,6 +96,7 @@ bool Remover(LE *Lista, int valor){
     }
 
     Lista->tamanho--;
+    Lista->final--;
     printf("Valor removido \n");
     return true;
 }
@@ -99,7 +106,7 @@ void Imprimir(LE *Lista){
     {
         printf("Lista vazia \n");
     }
-    for (int i = Lista->inicio; i < Lista->final; i++)
+    for (int i = Lista->inicio; i < Lista->tamanho; i++)
     {
         printf("%d \n", Lista->valores[i]);
     }
@@ -123,4 +130,31 @@ bool Busca(LE *Lista, int valor){
     }
     printf("Valor nao encontrado \n");
     return false;
+}
+
+
+int main()
+{
+    LE lista;
+    Inicializar(&lista);
+
+    InserirInicio(&lista, 1);
+    InserirInicio(&lista, 2);
+    InserirInicio(&lista, 3);
+    InserirFinal(&lista, 4);
+    InserirFinal(&lista, 5);
+    InserirFinal(&lista, 6);
+
+    Imprimir(&lista);
+
+    Busca(&lista, 4);
+    Busca(&lista, 7);
+
+    Remover(&lista, 4);
+    Imprimir(&lista);
+
+    Vazia(&lista);
+    Cheia(&lista);
+
+    return 0;
 }

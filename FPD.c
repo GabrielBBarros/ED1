@@ -13,8 +13,8 @@ typedef struct no
 typedef struct fpd
 {
     int tamanho;
-    struct NO *inicio;
-    struct NO *fim;
+    NO *inicio;
+    NO *fim;
 }FPD;
 
 
@@ -41,22 +41,31 @@ bool InserirGeral(FPD *Fila, float valor){
     }
     aux->valor = valor;
     aux->prox = NULL;
-    if (Fila->inicio == NULL)
+
+    if (Fila->inicio == NULL) // Se a fila estiver vazia
     {
+        Fila->inicio = aux;
+        Fila->fim = aux;
+        Fila->tamanho++;
+        return true;
+    }
+
+    if (valor > 60) // Inserção com prioridade
+    {
+        aux->prox = Fila->inicio;
         Fila->inicio = aux;
         Fila->tamanho++;
         return true;
     }
-    if (valor>60)
-    {
-        Fila->inicio = aux;
-        Fila->tamanho++;
-        return true;
-    }
+
+    // Inserção no final da fila
+    Fila->fim->prox = aux;
     Fila->fim = aux;
     Fila->tamanho++;
     return true;
 }
+
+
 
 bool Remover(FPD *Fila, float *valor){
     NO *aux = Fila->inicio;
@@ -104,8 +113,17 @@ bool Buscar(FPD *Fila, float valor){
     return false;
 }
 
-int main(int argc, char const *argv[])
+int main()
 {
-    /* code */
+    FPD fila;
+    Inicializar(&fila);
+    InserirGeral(&fila, 20);
+    InserirGeral(&fila, 30);
+    InserirGeral(&fila, 40);
+    InserirGeral(&fila, 50);
+    InserirGeral(&fila, 70);
+    Imprimir(&fila);
+    Buscar(&fila, 30);
     return 0;
 }
+

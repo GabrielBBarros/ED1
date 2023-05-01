@@ -6,119 +6,164 @@ typedef struct no
 {
     float valor;
     struct no *prox;
-}NO;
-
+} NO;
 
 typedef struct ld
 {
     int tamanho;
-    struct NO *inicio;
-    struct NO *final;
+    NO *inicio;
+    NO *final;
+} LD;
 
-}LD;
-
-
-void Inicializar(LD *Lista){
+void Inicializar(LD *Lista)
+{
     Lista->inicio = NULL;
+    Lista->final = NULL;
     Lista->tamanho = 0;
 }
 
-bool Vazio(LD *Lista){
-    if (Lista->tamanho == 0)
-    {
-        return true;
-    }
-    return false;
+bool Vazio(LD *Lista)
+{
+    return Lista->tamanho == 0;
 }
 
-bool InserirInicio(LD *Lista, float valor){
+bool InserirInicio(LD *Lista, float valor)
+{
     NO *novo = (NO *)malloc(sizeof(NO));
-    novo->valor = valor;
-    novo->prox = novo;
-    if (Lista->inicio == NULL)
+    if (novo == NULL)
     {
-        novo->prox = NULL;
-        Lista->inicio = novo;
+        return false;
+    }
+
+    novo->valor = valor;
+    novo->prox = Lista->inicio;
+    Lista->inicio = novo;
+
+    if (Lista->final == NULL)
+    {
         Lista->final = novo;
     }
-    else{
-        novo->prox = Lista->inicio;
-        Lista->inicio = novo;
-    }
+
     Lista->tamanho++;
+
     return true;
 }
 
-bool InserirFinal(LD *Lista, float valor){
+bool InserirFinal(LD *Lista, float valor)
+{
     NO *novo = (NO *)malloc(sizeof(NO));
+    if (novo == NULL)
+    {
+        return false;
+    }
+
     novo->valor = valor;
-    novo->prox = novo;
-    if (Lista->inicio == NULL)
+    novo->prox = NULL;
+
+    if (Lista->final == NULL)
     {
         Lista->inicio = novo;
         Lista->final = novo;
     }
-    else{
+    else
+    {
+        Lista->final->prox = novo;
         Lista->final = novo;
     }
+
     Lista->tamanho++;
+
+    return true;
 }
 
-bool Remover(LD *Lista, float valor){
-    if (Lista->inicio == NULL) {
-        printf("Lista vazia\n");
-        return false;
-    }   
-    
-    NO *aux = Lista->inicio;
+bool Remover(LD *Lista, float valor)
+{
+    NO *atual = Lista->inicio;
     NO *anterior = NULL;
-    
-    while (aux != NULL) {
-        if (aux->valor == valor) {
-            if (anterior == NULL) { // elemento a ser removido é o primeiro da lista
-                Lista->inicio = aux->prox;
-            } else {
-                anterior->prox = aux->prox;
+
+    while (atual != NULL)
+    {
+        if (atual->valor == valor)
+        {
+            if (anterior == NULL)
+            {
+                Lista->inicio = atual->prox;
             }
-            
-            free(aux);
+            else
+            {
+                anterior->prox = atual->prox;
+            }
+
+            if (atual == Lista->final)
+            {
+                Lista->final = anterior;
+            }
+
+            free(atual);
             Lista->tamanho--;
+
             return true;
         }
-        anterior = aux;
-        aux = aux->prox;
+
+        anterior = atual;
+        atual = atual->prox;
     }
-    
-    printf("Elemento nao encontrado na lista\n");
+
     return false;
 }
 
+void Imprimir(LD *Lista)
+{
+    NO *atual = Lista->inicio;
 
+    while (atual != NULL)
+    {
+        printf("%.2f ", atual->valor);
+        atual = atual->prox;
+    }
 
-void Imprimir(LD *Lista){
-    if (Lista->tamanho == 0)
-    {
-        printf("Lista vazia");
-        return;
-    }
-    NO *aux = Lista->inicio;
-    while (aux != NULL)    
-    {
-        printf("%f ", aux->valor);
-        aux = aux->prox;
-    }
+    printf("\n");
 }
 
-void Buscar(LD *Lista, float valor){
-    if (Lista->tamanho == 0)
+void Buscar(LD *Lista, float valor)
+{
+    NO *atual = Lista->inicio;
+
+    while (atual != NULL)
     {
-        printf("Lista vazia");
-        return;
+        if (atual->valor == valor)
+        {
+            printf("Valor encontrado: %.2f\n", valor);
+            return;
+        }
+
+        atual = atual->prox;
     }
-    NO *aux = Lista->inicio;
-    while(aux != NULL)
-    {
-        printf("%f ", aux->valor);
-        aux = aux->prox;
-    }
+
+    printf("Valor nao encontrado: %.2f\n", valor);
+}
+
+int main() {
+    LD lista;
+    Inicializar(&lista);
+
+    InserirFinal(&lista, 5);
+    InserirFinal(&lista, 7);
+    InserirFinal(&lista, 9);
+    InserirFinal(&lista, 11);
+
+    printf("Lista: ");
+    Imprimir(&lista);
+    printf("\n");
+
+    Buscar(&lista, 7);
+    printf("\n");
+
+    Remover(&lista, 9);
+
+    printf("Lista apos remover: ");
+    Imprimir(&lista);
+    printf("\n");
+
+    return 0;
 }

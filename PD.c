@@ -61,16 +61,18 @@ bool Inserir(PD*Lista, float valor){
 bool Busca(PD*Lista, float valor){
     int posicao = 0;
     NO *aux = Lista->topo;
-    while (Lista->topo != NULL)
+    while (aux != NULL)
     {
         if (aux->valor == valor)
         {
+            printf("Achou\n");
             return true;
         }
         aux = aux->prox;
         posicao++;
         
     }
+    printf("Não achou\n");
     return false;
     
 }
@@ -82,9 +84,9 @@ void Imprimir(PD*Lista){
         printf("Não tem nada man");
     }
     
-    while (Lista->topo != NULL)
+    while (aux != NULL)
     {
-        printf("%f", aux->valor);
+        printf("%f \n", aux->valor);
         aux = aux->prox;
     }
     
@@ -114,22 +116,7 @@ int main(){
     Inserir(&pilha, 20);
     Inserir(&pilha, 30);
     Inserir(&pilha, 40);
-
-    printf("Pilha:\n");
-    Imprimir(&pilha);
-
-    printf("\n");
-
-    printf("Busca por 20:\n");
-    if(Busca(&pilha, 20)){
-        printf("Encontrou o valor na pilha!\n");
-    } else {
-        printf("Valor não encontrado na pilha!\n");
-    }
-
-    printf("\n");
-
-    printf("Removendo topo da pilha:\n");
+    Busca(&pilha, 20);
     Remover(&pilha);
 
     printf("Pilha:\n");

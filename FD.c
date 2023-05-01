@@ -35,16 +35,19 @@ bool InserirInicio(FD *Fila, float valor){
     NO *aux = (NO *)malloc(sizeof(NO));
     aux->valor = valor;
     aux->prox = NULL;
-        if (Fila->inicio == NULL)
-        {
-            Fila->inicio = aux;
-            Fila->tamanho++;
-            return true;
-        }
-    Fila->fim = aux;
+    if (Fila->inicio == NULL)
+    {
+        Fila->inicio = aux;
+        Fila->fim = aux;
+        Fila->tamanho++;
+        return true;
+    }
+    aux->prox = Fila->inicio;
+    Fila->inicio = aux;
     Fila->tamanho++;
     return true;
 }
+
 
 
 
@@ -59,7 +62,8 @@ bool Remover(FD *Fila, float *valor){
     *valor = aux->valor;
     Fila->inicio = aux->prox;
     free(aux);
-    Fila->tamanho--;   
+    Fila->tamanho--;  
+    return true; 
 }
 
 bool Busca(FD *Fila, float valor){
@@ -72,11 +76,12 @@ bool Busca(FD *Fila, float valor){
     {
         if (aux->valor == valor)
         {
-            printf("Encontrado");
+            printf("Encontrado\n");
             return true;
         }
         aux = aux->prox;
     }
+    printf("Não achado\n");
     return false; 
 }
 
@@ -84,13 +89,13 @@ void Imprimir(FD *Fila){
     NO *aux = Fila->inicio;
     if (Fila->inicio == NULL)
     {
-        printf("Fila vazia");  
+        printf("Fila vazia\n");  
     }
     else
     {
         while (aux != NULL)
         {
-            printf("%f ", aux->valor);
+            printf("%f \n", aux->valor);
             aux=aux->prox;
         }
         
@@ -99,6 +104,14 @@ void Imprimir(FD *Fila){
 
 int main(int argc, char const *argv[])
 {
-    /* code */
+    FD fila;
+    Iniciar(&fila);
+
+    InserirInicio(&fila, 2.5);
+    InserirInicio(&fila, 4.7);
+    InserirInicio(&fila, 8.1);
+    Busca(&fila, 2.5);
+    Imprimir(&fila);
+    printf("\n");
     return 0;
 }
