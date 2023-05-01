@@ -23,35 +23,61 @@ void Push(Pilha *P, int valor){
 int main(int argc, char const *argv[])
 {
     Pilha pilha = {NULL};
-    char operacao;
     int valor;
+    char operacao;
+    printf("Digite uma operacao: ");
+    scanf("%c", operacao);
     while (true)
     {
-        printf("Digite um valor ou uma operacao (+): ");
-        scanf(" %c", &operacao);
-
         if (operacao == '+')
         {
-            if (pilha.topo == NULL || pilha.topo->prox == NULL)
-            {
-                printf("Erro: pilha vazia.\n");
-                exit(EXIT_FAILURE);
-            }
+            printf("Digite um valor (ou 0 para sair): ");
+        scanf("%i", &valor);
 
-            int valor1 = pilha.topo->valor;
-            pilha.topo = pilha.topo->prox;
-
-            int valor2 = pilha.topo->valor;
-            pilha.topo = pilha.topo->prox;
-
-            Push(&pilha, valor2 + valor1);
-            printf("%i \n", pilha.topo->valor);
-        }
-        else
+        if (valor == 0)
         {
-            scanf("%i", &valor);
-            Push(&pilha, valor);
+            break;
         }
+
+        Push(&pilha, valor);
+
+        int soma = 0;
+        NO *aux = pilha.topo;
+        while (aux != NULL)
+        {
+            soma += aux->valor;
+            aux = aux->prox;
+        }
+
+        printf("Soma: %i\n", soma);
+        }
+
+
+
+        if (operacao == '-')
+        {
+        printf("Digite um valor (ou 0 para sair): ");
+        scanf("%i", &valor);
+
+        if (valor == 0)
+        {
+            break;
+        }
+
+        Push(&pilha, valor);
+
+        int subtracao = 0;
+        NO *aux = pilha.topo;
+        while (aux != NULL)
+        {
+            subtracao -= aux->valor;
+            aux = aux->prox;
+        }
+
+        printf("Soma: %i\n", subtracao);
+        }
+        
+        
     }
 
     return 0;
