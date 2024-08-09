@@ -35,27 +35,17 @@ bool Vazio(PD*Lista){
 bool Inserir(PD*Lista, float valor){
     
     NO *novo = (NO*)malloc(sizeof(NO));
-    novo->valor = valor;
-    //Se minha pilha está zerada
     if (novo == NULL)
     {
         return false;
     }
     
-    if (Lista->topo == NULL)
-    {
-        //Proximo novo está nulo
-        novo->prox = NULL;
-
-    }
-    else
-    {
-        //O meu proximo é o elemento inserido
-        novo->prox = Lista->topo;
-    }
+    novo->valor = valor;
+    //Vc so tem dificuldade aqui
+    novo->prox = Lista->topo;
+    //
     Lista->topo = novo;
     Lista->tamanho++;
-    return true;
 }
 
 bool Busca(PD*Lista, float valor){

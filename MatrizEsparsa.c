@@ -54,6 +54,19 @@ void Inserir(MatrizEsparsa* M, int valor, int linha, int coluna)
     M->coluna[coluna] = novo_no;
 }
 
+void MatrizK(MatrizEsparsa* M, int linha, int valork){
+    NO *aux = M->linha[linha];
+    while (aux!=NULL)
+    {
+        aux->valor = aux->valor+valork;
+        if (aux->valor == 0)
+        {
+            aux->valor = NULL;
+        }
+        aux =aux->direita;
+    }  
+}
+
 
 
 //Imprimir linha

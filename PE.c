@@ -61,7 +61,6 @@ bool Pop(PE *Pilha){
     Pilha->topo--;
     Pilha->tamanho--;
     return true;
-    
 }
 
 bool Busca(PE *Pilha, float valor){
